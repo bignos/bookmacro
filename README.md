@@ -2,6 +2,10 @@
                                    BookMacro 
 </h1>
 
+<p align="center">
+    <img src="bookMacro.png" alt="BookMacro logo" title="BookMacro logo">
+</p>
+
 Save your Neovim Macros
 
 # Dependencies
