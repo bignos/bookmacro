@@ -2,8 +2,6 @@
                                    BookMacro 
 </h1>
 
----
-
 Save your Neovim Macros
 
 # Dependencies
