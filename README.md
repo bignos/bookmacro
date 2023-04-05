@@ -6,7 +6,11 @@
     <img src="bookMacro.png" alt="BookMacro logo" title="BookMacro logo">
 </p>
 
-Save your Magic
+<p align="center">
+                                Save Your Magic
+</p>
+
+---
 
 # What is BookMacro?
 
