@@ -7,7 +7,8 @@
 </p>
 
 Save your Neovim Macros
-![Select Macro Video](select_macro.gif)
+
+![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
 
 # Dependencies
 
