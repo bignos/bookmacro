@@ -89,6 +89,20 @@ return {
                 vim.cmd.MacroDel,
                 desc = "Delete a macro from BookMacro",
             },
+
+            -- Export BookMacro
+            {
+                "<leader>Me",
+                vim.cmd.MacroExport,
+                desc = "Export BookMacro to a JSON file",
+            },
+
+            -- Import a BookMacro
+            {
+                "<leader>Mi",
+                vim.cmd.MacroImport,
+                desc = "Import BookMacro with a JSON file",
+            },
         },
         init = function()
             require("bookmacro").setup()
@@ -104,3 +118,5 @@ return {
 - `:MacroAdd` to add a macro on BookMacro
 - `:MacroDel` to remove a macro from BookMacro
 - `:MacroSelect` to add a macro from BookMacro to a registry
+- `:MacroExport` to export BookMacro to a file
+- `:MacroImport` to replace from file data for BookMacro

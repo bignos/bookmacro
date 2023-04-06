@@ -13,8 +13,23 @@ local function triml(str)
     return string.gsub(str, "^%s*(.-)%s*$", "%1")
 end
 
+local function save_to(path)
+	Path.new(path):write(vim.fn.json_encode(BookMacro), "w")
+end
+
 local function save()
-	Path.new(save_file):write(vim.fn.json_encode(BookMacro), "w")
+    save_to(save_file)
+end
+
+local function load_from(path)
+	if vim.fn.filereadable(path) ~= 0 then
+		BookMacro = vim.fn.json_decode(Path.new(path):read())
+        save()
+	end
+end
+
+local function load()
+    load_from(save_file)
 end
 
 local function get_register_list()
@@ -37,7 +52,7 @@ local function put_to_register(register, string)
 	vim.fn.setreg(register, string)
 end
 
-local function insertMacro(description, macro)
+local function insert_macro(description, macro)
 	local tuple = {
 		description = description,
 		macro = macro,
@@ -45,9 +60,9 @@ local function insertMacro(description, macro)
 	table.insert(BookMacro, tuple)
 end
 
-local function insertAndSaveMacro(description, macro_reg)
+local function insert_and_save_macro(description, macro_reg)
 	local macro = vim.fn.getreg(macro_reg)
-	insertMacro(description, macro)
+	insert_macro(description, macro)
     save()
 end
 
@@ -57,11 +72,17 @@ local function get_from_user(prompt, func)
 	}, func)
 end
 
+local function get_file_from_user(prompt, default, completion, func)
+	vim.ui.input({
+		prompt = prompt,
+        default = default,
+        completion = completion,
+	}, func)
+end
+
 -- Public
 function M.setup()
-	if vim.fn.filereadable(save_file) ~= 0 then
-		BookMacro = vim.fn.json_decode(Path.new(save_file):read())
-	end
+    load()
 
     -- Declaration of user commands
     vim.api.nvim_create_user_command('MacroAdd', function()
@@ -75,6 +96,14 @@ function M.setup()
     vim.api.nvim_create_user_command('MacroSelect', function()
         M.selectMacro()
     end, { desc = "Select a macro from BookMacro" })
+
+    vim.api.nvim_create_user_command('MacroExport', function()
+        M.exportMacro()
+    end, { desc = "Export BookMacro to a JSON file" })
+
+    vim.api.nvim_create_user_command('MacroImport', function()
+        M.importMacro()
+    end, { desc = "Replace BookMacro with a JSON file" })
 end
 
 function M.addMacro()
@@ -86,7 +115,7 @@ function M.addMacro()
             local register = string.sub(macro,1,1)
 			get_from_user("Macro description", function(description)
 				if description then
-					insertAndSaveMacro(description, register)
+					insert_and_save_macro(description, register)
 				end
 			end)
 		end
@@ -122,6 +151,26 @@ function M.selectMacro()
 			end)
 		end
 	end)
+end
+
+function M.exportMacro()
+    get_file_from_user("Export BookMacro", "bookmacro.json", "file", function(file)
+        if file then
+            save_to(file)
+            print("Export to " .. file .. " [ DONE ]")
+        end
+    end
+    )
+end
+
+function M.importMacro()
+    get_file_from_user("Import file to BookMacro", "", "file", function(file)
+        if file then
+            load_from(file)
+            print("Import " .. file .. " [ DONE ]")
+        end
+    end
+    )
 end
 
 -- Main
