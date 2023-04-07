@@ -83,6 +83,20 @@ return {
                 desc = "Add a macro to BookMacro",
             },
 
+            -- Edit a macro
+            {
+                "<leader>Me",
+                vim.cmd.MacroEdit,
+                desc = "Edit a macro from BookMacro",
+            },
+
+            -- Edit a register
+            {
+                "<leader>Mr",
+                vim.cmd.MacroRegEdit,
+                desc = "Edit a macro from register",
+            },
+
             -- Delete a macro
             {
                 "<leader>Md",
@@ -92,14 +106,14 @@ return {
 
             -- Export BookMacro
             {
-                "<leader>Me",
+                "<leader>ME",
                 vim.cmd.MacroExport,
                 desc = "Export BookMacro to a JSON file",
             },
 
             -- Import a BookMacro
             {
-                "<leader>Mi",
+                "<leader>MI",
                 vim.cmd.MacroImport,
                 desc = "Import BookMacro with a JSON file",
             },
@@ -116,6 +130,8 @@ return {
 ## Commands
 
 - `:MacroAdd` to add a macro on BookMacro
+- `:MacroEdit` to edit a macro from BookMacro
+- `:MacroRegEdit` to edit a macro from a Register
 - `:MacroDel` to remove a macro from BookMacro
 - `:MacroSelect` to add a macro from BookMacro to a registry
 - `:MacroExport` to export BookMacro to a file
