@@ -32,7 +32,6 @@ local function get_from_user_with_default(prompt, default, func)
 	}, func)
 end
 
-
 -- TUI promt to ask a file to the user with a defaut input
 --
 -- @param prompt The prompt to display
@@ -64,6 +63,21 @@ function M.addMacro()
 					Macro.insert_and_save_macro(description, register)
 				end
 			end)
+		end
+	end)
+end
+
+---
+-- Execute a Macro from the BookMacro libray
+function M.executeMacro()
+	vim.ui.select(BookMacro, {
+		prompt = "Select a Macro to run",
+		format_item = function(item)
+			return item.description
+		end,
+	}, function(macro, idx)
+		if macro then
+			Macro.execute_from_index(idx)
 		end
 	end)
 end
@@ -165,6 +179,16 @@ function M.importMacro()
 			print("Import " .. file .. " [ DONE ]")
 		end
 	end)
+end
+
+---
+-- Erase The Book
+-- Ask confirmation
+function M.eraseMacro()
+	local confirm = vim.fn.confirm("Erase The Book?", "&Yes\n&No")
+	if confirm == 1 then -- If user respond Yes
+        Macro.erase_the_book()
+	end
 end
 
 return M

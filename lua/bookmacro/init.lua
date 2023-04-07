@@ -22,6 +22,10 @@ function M.setup()
 		TUI.addMacro()
 	end, { desc = "Add a macro to BookMacro" })
 
+	vim.api.nvim_create_user_command("MacroExec", function()
+		TUI.executeMacro()
+	end, { desc = "Execute a macro from BookMacro" })
+
 	vim.api.nvim_create_user_command("MacroEdit", function()
 		TUI.editMacro()
 	end, { desc = "Edit a macro from BookMacro" })
@@ -45,6 +49,10 @@ function M.setup()
 	vim.api.nvim_create_user_command("MacroImport", function()
 		TUI.importMacro()
 	end, { desc = "Replace BookMacro with a JSON file" })
+
+	vim.api.nvim_create_user_command("MacroErase", function()
+		TUI.eraseMacro()
+	end, { desc = "Erase all macro from BookMacro" })
 end
 
 M.setup()

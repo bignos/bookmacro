@@ -100,4 +100,32 @@ function M.insert_and_save_macro(description, macro_reg)
 	M.save()
 end
 
+---
+-- Execute a macro
+--
+-- @param macro The macro to execute
+function M.execute(macro)
+    vim.cmd("silent normal " .. macro)
+end
+
+---
+-- Execute a macro from BookMacro
+--
+-- @param index The index of the macro from BookMacro
+function M.execute_from_index(index)
+    M.execute(BookMacro[index].macro)
+end
+
+---
+-- Erase all BookMacro entries
+--
+-- Warning: All macros will be lost
+function M.erase_the_book()
+    local size = #BookMacro
+    for index=0, size do
+        BookMacro[index] = nil
+    end
+    M.save()
+end
+
 return M
