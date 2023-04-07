@@ -44,7 +44,7 @@ local function get_register_list()
 
 	for line in string.gmatch(output_register, "[^\r\n]+") do
 		local trimed_str = triml(line)
-		if string.find(trimed_str, '^c  "%a') then
+		if string.find(trimed_str, '^[cl]  "%a') then
 			local clean_entry = string.gsub(trimed_str, [[^.*"(.*)$]], [[%1]])
 			table.insert(registers, clean_entry)
 		end
