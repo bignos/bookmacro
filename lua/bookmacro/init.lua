@@ -34,7 +34,7 @@ local function load_from(path)
 end
 
 local function load()
-    return load_from(save_file)
+	return load_from(save_file)
 end
 
 local function get_register_list()
@@ -77,6 +77,13 @@ local function get_from_user(prompt, func)
 	}, func)
 end
 
+local function get_from_user_with_default(prompt, default, func)
+	vim.ui.input({
+		prompt = prompt,
+		default = default,
+	}, func)
+end
+
 local function get_file_from_user(prompt, default, completion, func)
 	vim.ui.input({
 		prompt = prompt,
@@ -93,6 +100,14 @@ function M.setup()
 	vim.api.nvim_create_user_command("MacroAdd", function()
 		M.addMacro()
 	end, { desc = "Add a macro to BookMacro" })
+
+	vim.api.nvim_create_user_command("MacroEdit", function()
+		M.editMacro()
+	end, { desc = "Edit a macro from BookMacro" })
+
+    vim.api.nvim_create_user_command("MacroRegEdit", function()
+        M.editRegMacro()
+    end, { desc = "Edit a macro from a register" })
 
 	vim.api.nvim_create_user_command("MacroDel", function()
 		M.removeMacro()
@@ -121,6 +136,42 @@ function M.addMacro()
 			get_from_user("Macro description", function(description)
 				if description then
 					insert_and_save_macro(description, register)
+				end
+			end)
+		end
+	end)
+end
+
+function M.editMacro()
+	vim.ui.select(BookMacro, {
+		prompt = "Edit a Macro",
+		format_item = function(item)
+			return item.description .. " >> '" .. item.macro .. "'"
+		end,
+	}, function(macro, idx)
+		if macro then
+			get_from_user_with_default("New Macro:", macro.macro, function(edited_macro)
+				if edited_macro then
+					BookMacro[idx].macro = edited_macro
+					save()
+				end
+			end)
+		end
+	end)
+end
+
+function M.editRegMacro()
+	local register_list = get_register_list()
+	vim.ui.select(register_list, {
+		prompt = "Edit a Macro from register",
+	}, function(macro, _)
+		if macro then
+			local register = string.sub(macro, 1, 1)
+			local registry_content = vim.fn.getreg(register)
+
+			get_from_user_with_default("New Macro:", registry_content, function(edited_macro)
+				if edited_macro then
+					put_to_register(register, edited_macro)
 				end
 			end)
 		end
