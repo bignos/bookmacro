@@ -1,3 +1,7 @@
+---
+-- Macro Module
+-- All methods for Macro management
+
 local Path = require("plenary.path")
 local Utils = require("bookmacro.utils")
 
@@ -6,14 +10,27 @@ local save_file = string.format("%s/bookMacro.json", data_path)
 
 local M = {}
 
+---
+-- Save BookMacro to a file
+--
+-- @param path File where to save BookMacro
 function M.save_to(path)
 	Path.new(path):write(vim.fn.json_encode(BookMacro), "w")
 end
 
+---
+-- Save BookMacro to the defaut data file 'bookMacro.json'
 function M.save()
 	M.save_to(save_file)
 end
 
+---
+-- Load BookMacro with a file
+--
+-- [Warning] this method overwrite defaul data file with new data
+--
+-- @param path File where to load data
+-- @return true if data was exported, false if the file is not found
 function M.load_from(path)
 	local full_path = vim.fn.expand(path)
 	if vim.fn.filereadable(full_path) ~= 0 then
@@ -26,6 +43,10 @@ function M.load_from(path)
 	end
 end
 
+---
+-- Load BookMacro with the defaut data file 'bookMacro.json'
+--
+-- @return true if data was loaded, false if the file is not found
 function M.load()
 	return M.load_from(save_file)
 end
@@ -46,10 +67,20 @@ function M.get_register_list()
 	return registers
 end
 
+--- 
+-- Wrapper to add a string to a register
+--
+-- @param register The register you want to populate
+-- @param string The string you want to add on the register
 function M.put_to_register(register, string)
 	vim.fn.setreg(register, string)
 end
 
+---
+-- Add a macro to BookMacro
+--
+-- @param description The description of the macro
+-- @param macro The Macro
 function M.insert_macro(description, macro)
 	local tuple = {
 		description = description,
@@ -58,31 +89,15 @@ function M.insert_macro(description, macro)
 	table.insert(BookMacro, tuple)
 end
 
+---
+-- Add a macro from register and save to defaut data file 'bookMacro.json'
+--
+-- @param description The description of the macro
+-- @param macro_reg The register where is the macro
 function M.insert_and_save_macro(description, macro_reg)
 	local macro = vim.fn.getreg(macro_reg)
 	M.insert_macro(description, macro)
 	M.save()
-end
-
-function M.get_from_user(prompt, func)
-	vim.ui.input({
-		prompt = prompt,
-	}, func)
-end
-
-function M.get_from_user_with_default(prompt, default, func)
-	vim.ui.input({
-		prompt = prompt,
-		default = default,
-	}, func)
-end
-
-function M.get_file_from_user(prompt, default, completion, func)
-	vim.ui.input({
-		prompt = prompt,
-		default = default,
-		completion = completion,
-	}, func)
 end
 
 return M
