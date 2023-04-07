@@ -86,12 +86,12 @@ return {
                 desc = "Load a macro to a registry",
             },
 
-			-- Execute a macro
-			{
-				"<leader>Ml",
-				vim.cmd.MacroExec,
-				desc = "Execute a macro from BookMacro",
-			},
+            -- Execute a macro
+            {
+                "<leader>Ml",
+                vim.cmd.MacroExec,
+                desc = "Execute a macro from BookMacro",
+            },
 
             -- Add a macro
             {
@@ -135,12 +135,12 @@ return {
                 desc = "Import BookMacro with a JSON file",
             }, 
 
-			-- Erase BookMacro
-			{
-				"<leader>ME",
-				vim.cmd.MacroErase,
-				desc = "Erase all macros from The Book",
-			},
+            -- Erase BookMacro
+            {
+                "<leader>ME",
+                vim.cmd.MacroErase,
+                desc = "Erase all macros from The Book",
+            },
         },
         init = function()
             require("bookmacro").setup()
