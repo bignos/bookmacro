@@ -30,6 +30,10 @@ function M.setup()
 		TUI.editMacro()
 	end, { desc = "Edit a macro from BookMacro" })
 
+	vim.api.nvim_create_user_command("MacroDescEdit", function()
+		TUI.editMacroDescription()
+	end, { desc = "Edit a description of a macro from BookMacro" })
+
 	vim.api.nvim_create_user_command("MacroRegEdit", function()
 		TUI.editRegMacro()
 	end, { desc = "Edit a macro from a register" })
