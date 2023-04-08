@@ -22,6 +22,7 @@ you can:
 - **Add** a macro to the _Book_
 - **Execute** a macro from the _Book_
 - **Edit** a macro from the _Book_
+- **Edit** a macro description from the _Book_
 - **Edit** a macro from a _named register_
 - **Delete** a macro from the _Book_
 - **Load** a macro from the _Book_ into a _named register_
@@ -107,6 +108,13 @@ return {
                 desc = "Edit a macro from BookMacro",
             },
 
+            -- Edit the description of a macro
+            {
+                "<leader>MD",
+                vim.cmd.MacroDescEdit,
+                desc = "Edit a description of a macro from BookMacro",
+            },
+
             -- Edit a register
             {
                 "<leader>Mr",
@@ -156,6 +164,7 @@ return {
 - `:MacroAdd` to add a macro on BookMacro
 - `:MacroExec` to execute a macro from BookMacro
 - `:MacroEdit` to edit a macro from BookMacro
+- `:MacroDescEdit` to edit the description of a macro from BookMacro
 - `:MacroRegEdit` to edit a macro from a Register
 - `:MacroDel` to remove a macro from BookMacro
 - `:MacroSelect` to add a macro from BookMacro to a registry

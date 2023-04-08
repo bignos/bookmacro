@@ -103,6 +103,26 @@ function M.editMacro()
 end
 
 ---
+-- Edit a Description of a Macro from BookMacro
+function M.editMacroDescription()
+	vim.ui.select(BookMacro, {
+		prompt = "Choose a Macro",
+		format_item = function(item)
+			return item.description
+		end,
+	}, function(macro, idx)
+		if macro then
+			get_from_user_with_default("New Description:", macro.description, function(new_description)
+				if new_description then
+					BookMacro[idx].description = new_description
+					Macro.save()
+				end
+			end)
+		end
+	end)
+end
+
+---
 -- Edit a Macro from register
 function M.editRegMacro()
 	local register_list = Macro.get_register_list()
