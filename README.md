@@ -89,7 +89,7 @@ return {
 
             -- Execute a macro
             {
-                "<leader>Ml",
+                "<leader>Mx",
                 vim.cmd.MacroExec,
                 desc = "Execute a macro from BookMacro",
             },
