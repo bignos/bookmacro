@@ -27,7 +27,9 @@ you can:
 - **Delete** a macro from the _Book_
 - **Load** a macro from the _Book_ into a _named register_
 - **Export** the _Book_ to a JSON file
+- **Export** a macro to a JSON file
 - **Import** the _Book_ from a JSON file
+- **Import** a macro from a JSON file
 - **Erase** the _Book_
 
 ![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
@@ -107,7 +109,6 @@ return {
                 vim.cmd.MacroEdit,
                 desc = "Edit a macro from BookMacro",
             },
-
             -- Edit the description of a macro
             {
                 "<leader>MD",
@@ -136,12 +137,26 @@ return {
                 desc = "Export BookMacro to a JSON file",
             },
 
+            -- Export a Macro
+            {
+                "<leader>Mz",
+                vim.cmd.MacroExportTo,
+                desc = "Export a macro to a JSON file",
+            },
+
             -- Import a BookMacro
             {
                 "<leader>MI",
                 vim.cmd.MacroImport,
                 desc = "Import BookMacro with a JSON file",
             }, 
+
+            -- Import a macro
+            {
+                "<leader>MZ",
+                vim.cmd.MacroImportFrom,
+                desc = "Import a macro from a JSON file",
+            },
 
             -- Erase BookMacro
             {
@@ -169,5 +184,7 @@ return {
 - `:MacroDel` to remove a macro from BookMacro
 - `:MacroSelect` to add a macro from BookMacro to a registry
 - `:MacroExport` to export BookMacro to a file
-- `:MacroImport` to replace from file data for BookMacro
+- `:MacroExportTo` to export a macro to a file
+- `:MacroImport` to import Bookmacro from a file
+- `:MacroImportFrom` to import a macro from a file
 - `:MacroErase` to erase all BookMacro entries

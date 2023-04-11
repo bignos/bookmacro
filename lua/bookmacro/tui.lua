@@ -191,6 +191,32 @@ function M.exportMacro()
 end
 
 ---
+-- Export a macro from BookMacro to a JSON file
+-- Ask macro
+-- Ask filename
+function M.exportMacroTo()
+	vim.ui.select(BookMacro, {
+		prompt = "Select a Macro to export",
+		format_item = function(item)
+			return item.description
+		end,
+	}, function(macro, _)
+		if macro then
+			get_file_from_user("Export to file:", "", "file", function(file)
+				if file then
+					local loaded_file = Macro.get_macro_file(file)
+					if next(loaded_file) ~= nil then
+						Macro.insert_macro_to_array(loaded_file, macro.description, macro.macro)
+						Macro.save_array_to_file(loaded_file, file)
+						print("Export Macro [" .. macro.description .. "] to " .. file .. " [ DONE ]")
+					end
+				end
+			end)
+		end
+	end)
+end
+
+---
 -- Import from a JSON file to BookMacro
 -- Ask file to import
 function M.importMacro()
@@ -202,12 +228,37 @@ function M.importMacro()
 end
 
 ---
+-- Import a macro from a JSON file to BookMacro
+-- Ask file to import from
+function M.importMacroFrom()
+	get_file_from_user("Macro file:", "", "file", function(file)
+		if file then
+			local loaded_file = Macro.get_macro_file(file)
+			if next(loaded_file) ~= nil then
+				vim.ui.select(loaded_file, {
+					prompt = "Select a Macro to import",
+					format_item = function(item)
+						return item.description
+					end,
+				}, function(macro, _)
+                    if macro then
+                        Macro.insert_macro(macro.description, macro.macro)
+                        Macro.save()
+						print("Import Macro [" .. macro.description .. "] [ DONE ]")
+                    end
+                end)
+			end
+		end
+	end)
+end
+
+---
 -- Erase The Book
 -- Ask confirmation
 function M.eraseMacro()
 	local confirm = vim.fn.confirm("Erase The Book?", "&Yes\n&No")
 	if confirm == 1 then -- If user respond Yes
-        Macro.erase_the_book()
+		Macro.erase_the_book()
 	end
 end
 

@@ -50,9 +50,17 @@ function M.setup()
 		TUI.exportMacro()
 	end, { desc = "Export BookMacro to a JSON file" })
 
+	vim.api.nvim_create_user_command("MacroExportTo", function()
+		TUI.exportMacroTo()
+	end, { desc = "Export a macro to a JSON file" })
+
 	vim.api.nvim_create_user_command("MacroImport", function()
 		TUI.importMacro()
 	end, { desc = "Replace BookMacro with a JSON file" })
+
+	vim.api.nvim_create_user_command("MacroImportFrom", function()
+		TUI.importMacroFrom()
+	end, { desc = "Import a macro from a JSON file" })
 
 	vim.api.nvim_create_user_command("MacroErase", function()
 		TUI.eraseMacro()
