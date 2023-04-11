@@ -189,7 +189,7 @@ return {
 - `:MacroImportFrom` to import a macro from a file
 - `:MacroErase` to erase all BookMacro entries
 
-# Alternatives
+# ▶️ Alternatives
 
 - [nvim-recorder](https://github.com/chrisgrieser/nvim-recorder): Enhance the usage of macros in Neovim
 - [Macrobatics.vim](https://github.com/svermeulen/vim-macrobatics): Making VIM macros easier to use
