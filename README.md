@@ -12,7 +12,7 @@
 
 ---
 
-# 🗺️ What is BookMacro?
+# 📚 What is BookMacro?
 
 **BookMacro** is a [Neovim](https://neovim.io/) plugin that allows you to save your macros
 
@@ -34,13 +34,13 @@ you can:
 
 ![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
 
-# Getting Started
+# 🔰 Getting Started
 
 ## ⚡️ Required dependencies
 
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) To make it easier to read and save files
 
-## ⚡️ Suggested dependencies
+## 🍉 Suggested dependencies
 
 - [Dressing.nvim](https://github.com/stevearc/dressing.nvim) for a better **TUI**(Terminal User Interface)
 
@@ -72,7 +72,7 @@ return {
 }
 ```
 
-## ⚙️  Configuration
+## ⚙️ Configuration
 
 My [lazy.nvim](https://github.com/folke/lazy.nvim) configuration
 
@@ -174,7 +174,7 @@ return {
 
 # 🚀 Usage
 
-## Commands
+## 💻 Commands
 
 - `:MacroAdd` to add a macro on BookMacro
 - `:MacroExec` to execute a macro from BookMacro
