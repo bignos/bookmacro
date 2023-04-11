@@ -11,11 +11,20 @@ local save_file = string.format("%s/bookMacro.json", data_path)
 local M = {}
 
 ---
+-- Save an Array to a JSON File
+--
+-- @param array An Array
+-- @param file The path of the file to save
+function M.save_array_to_file(array, file)
+	Path.new(file):write(vim.fn.json_encode(array), "w")
+end
+
+---
 -- Save BookMacro to a file
 --
 -- @param path File where to save BookMacro
 function M.save_to(path)
-	Path.new(path):write(vim.fn.json_encode(BookMacro), "w")
+    M.save_array_to_file(BookMacro, path)
 end
 
 ---
@@ -25,22 +34,38 @@ function M.save()
 end
 
 ---
+-- Get a macro JSON file
+--
+-- @param path File where to load data from
+-- return The array of macro or an empty array in case of error
+function M.get_macro_file(path)
+    local result = {}
+    local full_path = vim.fn.expand(path)
+	if vim.fn.filereadable(full_path) ~= 0 then
+		result = vim.fn.json_decode(Path.new(path):read())
+	else
+		vim.api.nvim_err_writeln("File '" .. path .. "' Not found")
+	end
+    return result
+end
+
+---
 -- Load BookMacro with a file
 --
 -- [Warning] this method overwrite defaul data file with new data
 --
--- @param path File where to load data
+-- @param path File where to load data from
 -- @return true if data was exported, false if the file is not found
 function M.load_from(path)
-	local full_path = vim.fn.expand(path)
-	if vim.fn.filereadable(full_path) ~= 0 then
-		BookMacro = vim.fn.json_decode(Path.new(path):read())
-		M.save()
-		return true
-	else
-		vim.api.nvim_err_writeln("File '" .. path .. "' Not found")
-		return false
-	end
+    local loaded_file = M.get_macro_file(path)
+
+    if next(loaded_file) ~= nil then
+        BookMacro = loaded_file
+        M.save()
+        return true
+    else
+        return false
+    end
 end
 
 ---
@@ -77,16 +102,26 @@ function M.put_to_register(register, string)
 end
 
 ---
+-- Add a macro to an Array
+--
+-- @param array The array to append
+-- @param description The description of the macro
+-- @param macro The Macro
+function M.insert_macro_to_array(array, description, macro)
+	local tuple = {
+		description = description,
+		macro = macro,
+	}
+	table.insert(array, tuple)
+end
+
+---
 -- Add a macro to BookMacro
 --
 -- @param description The description of the macro
 -- @param macro The Macro
 function M.insert_macro(description, macro)
-	local tuple = {
-		description = description,
-		macro = macro,
-	}
-	table.insert(BookMacro, tuple)
+    M.insert_macro_to_array(BookMacro, description, macro)
 end
 
 ---
