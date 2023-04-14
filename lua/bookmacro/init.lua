@@ -38,6 +38,10 @@ function M.setup()
 		TUI.editRegMacro()
 	end, { desc = "Edit a macro from a register" })
 
+	vim.api.nvim_create_user_command("MacroReplace", function()
+		TUI.replaceMacroWithReg()
+	end, { desc = "Replace a macro from BookMacro with a register" })
+
 	vim.api.nvim_create_user_command("MacroDel", function()
 		TUI.removeMacro()
 	end, { desc = "Delete a macro from BookMacro" })

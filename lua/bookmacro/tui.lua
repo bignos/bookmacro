@@ -143,7 +143,35 @@ function M.editRegMacro()
 end
 
 ---
+-- Replace a Macro from the BookMacro with a register
+-- Ask Macro
+-- Ask Register
+function M.replaceMacroWithReg()
+	vim.ui.select(BookMacro, {
+		prompt = "Replace which macro",
+		format_item = function(item)
+			return item.description
+		end,
+	}, function(macro, idx)
+		if macro then
+			local register_list = Macro.get_register_list()
+			vim.ui.select(register_list, {
+				prompt = "With which register",
+			}, function(reg, _)
+				if reg then
+					local register = string.sub(reg, 1, 1)
+					local registry_content = vim.fn.getreg(register)
+                    Macro.replace_macro(idx, registry_content)
+                    Macro.save()
+				end
+			end)
+		end
+	end)
+end
+
+---
 -- Remove a Macro from BookMacro
+-- Ask Macro
 function M.removeMacro()
 	vim.ui.select(BookMacro, {
 		prompt = "Delete a Macro",
@@ -241,12 +269,12 @@ function M.importMacroFrom()
 						return item.description
 					end,
 				}, function(macro, _)
-                    if macro then
-                        Macro.insert_macro(macro.description, macro.macro)
-                        Macro.save()
+					if macro then
+						Macro.insert_macro(macro.description, macro.macro)
+						Macro.save()
 						print("Import Macro [" .. macro.description .. "] [ DONE ]")
-                    end
-                end)
+					end
+				end)
 			end
 		end
 	end)
