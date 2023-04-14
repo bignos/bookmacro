@@ -112,7 +112,7 @@ return {
             },
             -- Edit the description of a macro
             {
-                "<leader>MD",
+                "<leader>Md",
                 vim.cmd.MacroDescEdit,
                 desc = "Edit a description of a macro from BookMacro",
             },
@@ -133,7 +133,7 @@ return {
 
             -- Delete a macro
             {
-                "<leader>Md",
+                "<leader>MD",
                 vim.cmd.MacroDel,
                 desc = "Delete a macro from BookMacro",
             },
