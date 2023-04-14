@@ -24,6 +24,7 @@ you can:
 - **Edit** a macro from the _Book_
 - **Edit** a macro description from the _Book_
 - **Edit** a macro from a _named register_
+- **Replace** a macro from the _Book_ with a _named register_
 - **Delete** a macro from the _Book_
 - **Load** a macro from the _Book_ into a _named register_
 - **Export** the _Book_ to a JSON file
@@ -123,6 +124,13 @@ return {
                 desc = "Edit a macro from register",
             },
 
+            -- Replace a macro with a register
+            {
+                "<leader>MR",
+                vim.cmd.MacroReplace,
+                desc = "Replace a macro from BookMacro with the content of a register",
+            },
+
             -- Delete a macro
             {
                 "<leader>Md",
@@ -181,8 +189,9 @@ return {
 - `:MacroEdit` to edit a macro from BookMacro
 - `:MacroDescEdit` to edit the description of a macro from BookMacro
 - `:MacroRegEdit` to edit a macro from a Register
+- `:MacroReplace` to replace a macro from BookMacro with a register
 - `:MacroDel` to remove a macro from BookMacro
-- `:MacroSelect` to add a macro from BookMacro to a registry
+- `:MacroSelect` to add a macro from BookMacro to a register
 - `:MacroExport` to export BookMacro to a file
 - `:MacroExportTo` to export a macro to a file
 - `:MacroImport` to import Bookmacro from a file

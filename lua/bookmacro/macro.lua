@@ -136,6 +136,15 @@ function M.insert_and_save_macro(description, macro_reg)
 end
 
 ---
+-- Replace a macro in BookMacro
+--
+-- @param index Index of the macro from BookMacro
+-- @param new_macro New macro to relace
+function M.replace_macro(index, new_macro)
+    BookMacro[index].macro = new_macro
+end
+
+---
 -- Execute a macro
 --
 -- @param macro The macro to execute
