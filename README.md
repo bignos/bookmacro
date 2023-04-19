@@ -180,7 +180,7 @@ return {
     },
 }
 ```
-<details>
+</details>
 
 # 🚀 Usage
 
