@@ -1,6 +1,10 @@
 ---
 -- TUI Module
 -- Terminal User Interface methods
+--
+-- Need CONST:
+--  -> BookMacro
+--  -> DefaultMacroURL
 
 local Macro = require("bookmacro.macro")
 
@@ -256,6 +260,19 @@ function M.importMacro()
 end
 
 ---
+-- Import from an Internet JSON file to BookMacro
+-- Ask url to import
+function M.importMacroInternet()
+	get_file_from_user("Internet Macro url:", DefaultMacroURL, "", function(url)
+		if url then
+            local loaded_url = Macro.get_macro_from_url(url)
+            Macro.replace_with_array(loaded_url)
+			print("Import " .. url .. " [ DONE ]")
+		end
+	end)
+end
+
+---
 -- Import a macro from a JSON file to BookMacro
 -- Ask file to import from
 function M.importMacroFrom()
@@ -264,6 +281,31 @@ function M.importMacroFrom()
 			local loaded_file = Macro.get_macro_file(file)
 			if next(loaded_file) ~= nil then
 				vim.ui.select(loaded_file, {
+					prompt = "Select a Macro to import",
+					format_item = function(item)
+						return item.description
+					end,
+				}, function(macro, _)
+					if macro then
+						Macro.insert_macro(macro.description, macro.macro)
+						Macro.save()
+						print("Import Macro [" .. macro.description .. "] [ DONE ]")
+					end
+				end)
+			end
+		end
+	end)
+end
+
+---
+-- Import a macro from an Internet JSON file to BookMacro
+-- Ask url to import from
+function M.importMacroFromInternet()
+	get_file_from_user("Internet Macro url:", DefaultMacroURL, "", function(url)
+		if url then
+			local loaded_url = Macro.get_macro_from_url(url)
+			if next(loaded_url) ~= nil then
+				vim.ui.select(loaded_url, {
 					prompt = "Select a Macro to import",
 					format_item = function(item)
 						return item.description
