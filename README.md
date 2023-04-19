@@ -75,7 +75,8 @@ return {
 
 ## ⚙️ Configuration
 
-My [lazy.nvim](https://github.com/folke/lazy.nvim) configuration
+<details>
+<sumary>My [lazy.nvim](https://github.com/folke/lazy.nvim) configuration</sumary>
 
 ```lua
 return {
@@ -179,6 +180,7 @@ return {
     },
 }
 ```
+<details>
 
 # 🚀 Usage
 
