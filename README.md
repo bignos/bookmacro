@@ -141,7 +141,7 @@ return {
 
             -- Export BookMacro
             {
-                "<leader>ME",
+                "<leader>MX",
                 vim.cmd.MacroExport,
                 desc = "Export BookMacro to a JSON file",
             },
