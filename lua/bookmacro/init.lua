@@ -8,6 +8,7 @@ local M = {}
 
 -- [CONST]
 
+-- https://www.npoint.io/docs/81b5e2d91a75af3485ea
 DefaultMacroURL = "https://api.npoint.io/81b5e2d91a75af3485ea"
 
 -- Global data container
