@@ -30,7 +30,9 @@ you can:
 - **Export** the _Book_ to a JSON file
 - **Export** a macro to a JSON file
 - **Import** the _Book_ from a JSON file
+- **Import** the _Book_ from an _URL_
 - **Import** a macro from a JSON file
+- **Import** a macro from an _URL_
 - **Erase** the _Book_
 
 ![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
@@ -158,13 +160,28 @@ return {
                 "<leader>MI",
                 vim.cmd.MacroImport,
                 desc = "Import BookMacro with a JSON file",
-            }, 
+            },
+
+            -- Import BookMacro from an Internet url
+            {
+                "<leader>MU",
+                vim.cmd.MacroImportInternet,
+                desc = "Import BookMacro from an URL",
+            },
+
 
             -- Import a macro
             {
                 "<leader>MZ",
                 vim.cmd.MacroImportFrom,
                 desc = "Import a macro from a JSON file",
+            },
+
+            -- Import a macro from Internet
+            {
+                "<leader>Mu",
+                vim.cmd.MacroImportFromInternet,
+                desc = "Import a macro from an URL",
             },
 
             -- Erase BookMacro
@@ -198,7 +215,9 @@ return {
 - `:MacroExport` to export BookMacro to a file
 - `:MacroExportTo` to export a macro to a file
 - `:MacroImport` to import Bookmacro from a file
+- `:MacroImportInternet` to import Bookmacro from an URL
 - `:MacroImportFrom` to import a macro from a file
+- `:MacroImportFromInternet` to import a macro from an URL
 - `:MacroErase` to erase all BookMacro entries
 
 # ▶️ Alternatives

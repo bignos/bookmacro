@@ -1,8 +1,12 @@
 ---
 -- Macro Module
 -- All methods for Macro management
+--
+-- Need CONST:
+--  -> BookMacro
 
 local Path = require("plenary.path")
+local Curl = require("plenary.curl")
 local Utils = require("bookmacro.utils")
 
 local data_path = vim.fn.stdpath("data")
@@ -50,6 +54,33 @@ function M.get_macro_file(path)
 end
 
 ---
+-- Load an url with JSON content and return an array
+--
+-- @param url The url to load
+-- @return An array with all data from Internet
+function M.get_macro_from_url(url)
+    local result = Curl.get(url, {accept= "application/json"})
+    return vim.fn.json_decode(result.body)
+end
+
+---
+-- Replace the content of BookMacro with an array
+--
+-- [Warning] this method overwrite defaul data file with new data
+--
+-- @array The macro array to replace BookMacro
+-- @return true if BookMacro was replaced, false if the array is empty
+function M.replace_with_array(array)
+    if next(array) ~= nil then
+        BookMacro = array
+        M.save()
+        return true
+    else
+        return false
+    end
+end
+
+---
 -- Load BookMacro with a file
 --
 -- [Warning] this method overwrite defaul data file with new data
@@ -58,14 +89,7 @@ end
 -- @return true if data was exported, false if the file is not found
 function M.load_from(path)
     local loaded_file = M.get_macro_file(path)
-
-    if next(loaded_file) ~= nil then
-        BookMacro = loaded_file
-        M.save()
-        return true
-    else
-        return false
-    end
+    return M.replace_with_array(loaded_file)
 end
 
 ---

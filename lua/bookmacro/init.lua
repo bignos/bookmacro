@@ -6,6 +6,10 @@ local TUI = require("bookmacro.tui")
 
 local M = {}
 
+-- [CONST]
+
+DefaultMacroURL = "https://api.npoint.io/81b5e2d91a75af3485ea"
+
 -- Global data container
 BookMacro = BookMacro or {}
 
@@ -62,9 +66,17 @@ function M.setup()
 		TUI.importMacro()
 	end, { desc = "Replace BookMacro with a JSON file" })
 
+	vim.api.nvim_create_user_command("MacroImportInternet", function()
+		TUI.importMacroInternet()
+	end, { desc = "Replace with a JSON from Internet" })
+
 	vim.api.nvim_create_user_command("MacroImportFrom", function()
 		TUI.importMacroFrom()
 	end, { desc = "Import a macro from a JSON file" })
+
+	vim.api.nvim_create_user_command("MacroImportFromInternet", function()
+		TUI.importMacroFromInternet()
+	end, { desc = "Import a macro from the Internet" })
 
 	vim.api.nvim_create_user_command("MacroErase", function()
 		TUI.eraseMacro()
