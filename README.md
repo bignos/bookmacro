@@ -34,6 +34,7 @@ you can:
 - **Import** a macro from a JSON file
 - **Import** a macro from an _URL_
 - **Erase** the _Book_
+- **Substitute** on a _named register_
 
 ![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
 
@@ -190,6 +191,13 @@ return {
                 vim.cmd.MacroErase,
                 desc = "Erase all macros from The Book",
             },
+
+            -- Register substitution
+            {
+                "<leader>Ms",
+                vim.cmd.RegSub,
+                desc = "Use substitution on register",
+            },
         },
         init = function()
             require("bookmacro").setup()
@@ -219,6 +227,9 @@ return {
 - `:MacroImportFrom` to import a macro from a file
 - `:MacroImportFromInternet` to import a macro from an URL
 - `:MacroErase` to erase all BookMacro entries
+- `:RegSub` to use regexp substitution on a register
+- `:Sr <register> <pattern>` to use regexp substitution on a register in **command mode**
+    - ex: `:Sr a /this/thag/g` to substitute 'this' with 'that' on register **a**
 
 # ▶️ Alternatives
 

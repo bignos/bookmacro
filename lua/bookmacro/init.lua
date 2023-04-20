@@ -82,6 +82,17 @@ function M.setup()
 	vim.api.nvim_create_user_command("MacroErase", function()
 		TUI.eraseMacro()
 	end, { desc = "Erase all macro from BookMacro" })
+
+	vim.api.nvim_create_user_command("RegSub", function()
+		TUI.registerSubstitute()
+	end, { desc = "Substitute on a register" })
+
+    -- Command format
+    -- :Sr <register> <substitute pattern>
+    -- ex: `:Sr c ;this;that;g`
+	vim.api.nvim_create_user_command("Sr", function(opts)
+		TUI.regSub(opts.fargs[1], opts.fargs[2])
+	end, { nargs = '+', desc = "Substitute on a register with a command"})
 end
 
 M.setup()

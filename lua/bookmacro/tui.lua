@@ -50,6 +50,21 @@ local function get_file_from_user(prompt, default, completion, func)
 	}, func)
 end
 
+--- 
+-- Transform a sustitute pattern to a sustitute function argument
+--
+-- @param pattern The subsitute pattern
+-- @return The argument string for the substitute VIM function
+local function transform_substitution_pattern(pattern)
+	local separator = string.sub(pattern, 1, 1)
+	local list_arg = vim.split(pattern, separator, { true })
+	local pat = list_arg[2] or ""
+	local substitute = list_arg[3] or ""
+	local flags = list_arg[4] or ""
+	local result = "'" .. pat .. "', '" .. substitute .. "', '" .. flags .. "'"
+	return result
+end
+
 -- [ Public methods ] --
 
 ---
@@ -165,8 +180,8 @@ function M.replaceMacroWithReg()
 				if reg then
 					local register = string.sub(reg, 1, 1)
 					local registry_content = vim.fn.getreg(register)
-                    Macro.replace_macro(idx, registry_content)
-                    Macro.save()
+					Macro.replace_macro(idx, registry_content)
+					Macro.save()
 				end
 			end)
 		end
@@ -265,8 +280,8 @@ end
 function M.importMacroInternet()
 	get_file_from_user("Internet Macro url:", DefaultMacroURL, "", function(url)
 		if url then
-            local loaded_url = Macro.get_macro_from_url(url)
-            Macro.replace_with_array(loaded_url)
+			local loaded_url = Macro.get_macro_from_url(url)
+			Macro.replace_with_array(loaded_url)
 			print("Import " .. url .. " [ DONE ]")
 		end
 	end)
@@ -330,6 +345,45 @@ function M.eraseMacro()
 	if confirm == 1 then -- If user respond Yes
 		Macro.erase_the_book()
 	end
+end
+
+---
+-- Use substitution regex on a register (TUI Version)
+-- Ask Register
+-- Ask substitution pattern
+function M.registerSubstitute()
+	local register_list = Macro.get_register_list()
+	vim.ui.select(register_list, {
+		prompt = "Which register to substitute",
+	}, function(reg, _)
+		if reg then
+			local register = string.sub(reg, 1, 1)
+			get_from_user("Substitute pattern", function(s_pattern)
+				if s_pattern then
+					local sub_arg = transform_substitution_pattern(s_pattern)
+					-- let @c=@c->substitute('ABSOLUTE', 'ABIGSOLUTE', 'g')
+					local substitution_command = "let @"
+						.. register
+						.. "=@"
+						.. register
+						.. "->substitute("
+						.. sub_arg
+						.. ")"
+					vim.cmd(substitution_command)
+				end
+			end)
+		end
+	end)
+end
+
+---
+-- Use substitution regex on a register (Command Version)
+-- @param register The register to sustitute
+-- @param pattern The sustitution pattern(/<pat>/<sub>/<flags)
+function M.regSub(register, pattern)
+	local sub_arg = transform_substitution_pattern(pattern)
+	local substitution_command = "let @" .. register .. "=@" .. register .. "->substitute(" .. sub_arg .. ")"
+	vim.cmd(substitution_command)
 end
 
 return M
