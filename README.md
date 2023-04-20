@@ -229,7 +229,7 @@ return {
 - `:MacroErase` to erase all BookMacro entries
 - `:RegSub` to use regexp substitution on a register
 - `:Sr <register> <pattern>` to use regexp substitution on a register in **command mode**
-    - ex: `:Sr a /this/thag/g` to substitute 'this' with 'that' on register **a**
+    - **Example**: `:Sr a /this/thag/g` to substitute 'this' with 'that' on **register A**
 
 # ▶️ Alternatives
 
