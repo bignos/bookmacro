@@ -36,7 +36,8 @@ you can:
 - **Erase** the _Book_
 - **Substitute** on a _named register_
 
-![select_macro](https://user-images.githubusercontent.com/43069553/229956541-b0025501-baad-4583-be44-7ff4d96750cc.gif)
+![Macro Execution](https://user-images.githubusercontent.com/43069553/233655609-96ea8d3b-7665-42c6-9031-27435285e153.gif)
+
 
 # 🔰 Getting Started
 
