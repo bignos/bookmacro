@@ -211,6 +211,8 @@ return {
 
 # 🚀 Usage
 
+Check the inline documentation with `:help bookmacro.txt`
+
 ## 💻 Commands
 
 - `:MacroAdd` to add a macro on BookMacro
