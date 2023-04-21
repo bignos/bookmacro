@@ -1,24 +1,43 @@
 *bookmacro.txt* Documentation for the BookMacro plugin
 
-______             _   ___  ___                      ~
-| ___ \           | |  |  \/  |                      ~
-| |_/ / ___   ___ | | _| .  . | __ _  ___ _ __ ___   ~
-| ___ \/ _ \ / _ \| |/ / |\/| |/ _` |/ __| '__/ _ \  ~
-| |_/ / (_) | (_) |   <| |  | | (_| | (__| | | (_) | ~
-\____/ \___/ \___/|_|\_\_|  |_/\__,_|\___|_|  \___/  ~
-
+>
+             ______             _   ___  ___
+             | ___ \           | |  |  \/  |
+             | |_/ / ___   ___ | | _| .  . | __ _  ___ _ __ ___
+             | ___ \/ _ \ / _ \| |/ / |\/| |/ _` |/ __| '__/ _ \
+             | |_/ / (_) | (_) |   <| |  | | (_| | (__| | | (_) |
+             \____/ \___/ \___/|_|\_\_|  |_/\__,_|\___|_|  \___/
+<
 
 https://github.com/bignos/bookmacro
 
 ================================================================================
-CONTENTS                                                     *BookmacroContents*
+CONTENTS                                                    *bookmacro-contents*
 
-    1. Introduction.................................. |BookmacroIntroduction|
-    2. Usage......................................... |BookmacroUsage|
-    3. License....................................... |BookmacroLicense|
+    1. INTRODUCTION.................................. |bookmacro-introduction|
+    2. USAGE......................................... |bookmacro-usage|
+      2.1 COMMANDS................................... |bookmacro-commands|
+        2.1.1  ADD MACRO TO THE BOOK................. |:MacroAdd|
+        2.1.2  EXECUTE A MACRO FROM THE BOOK......... |:MacroExec|
+        2.1.3  EDIT A MACRO FROM THE BOOK............ |:MacroEdit|
+        2.1.4  EDIT THE DESCRIPTION OF A MACRO....... |:MacroDescEdit|
+        2.1.5  EDIT A MACRO FROM A REGISTER.......... |:MacroRegEdit|
+        2.1.6  REPLACE A MACRO FROM THE BOOK......... |:MacroReplace|
+        2.1.7  DELETE A MACRO FROM THE BOOK.......... |:MacroDel|
+        2.1.8  SELECT A MACRO FROM THE BOOK.......... |:MacroSelect|
+        2.1.9  EXPORT THE BOOK....................... |:MacroExport|
+        2.1.10 EXPORT A MACRO FROM THE BOOK.......... |:MacroExportTo|
+        2.1.11 IMPORT THE BOOK....................... |:MacroImport|
+        2.1.12 IMPORT THE BOOK FROM INTERNET......... |:MacroImportInternet|
+        2.1.13 IMPORT A MACRO TO THE BOOK............ |:MacroImportFrom|
+        2.1.14 IMPORT A MACRO FROM INTERNET.......... |:MacroImportFromInternet|
+        2.1.15 ERASE THE BOOK........................ |:MacroErase|
+        2.1.16 SUBSTITUTE ON REGISTER................ |:RegSub|
+        2.1.17 SUBSTITUTE ON REGISTER EX COMMAND..... |:Sr|
+    3. LICENSE....................................... |bookmacro-license|
 
 ================================================================================
-Section 1: Introduction                                  *BookmacroIntroduction*
+INTRODUCTION                                            *bookmacro-introduction*
 
 BookMacro is a macro management plugin.
 
@@ -32,7 +51,9 @@ Let's take a simple use case:
 you want to properly format a JSON file.
 You search and find that you can do this with
 
-`:%!python -m json.tool`
+>vim
+    :%!python -m json.tool
+<
 
 You test the VIM command and find that it works as expected.
 
@@ -53,33 +74,217 @@ registers.
 And finally you can share your macros with other users.
 
 ================================================================================
-Section 2: Usage                                                *BookmacroUsage*
+USAGE                                                          *bookmacro-usage*
 
-WORK IN PROGRESS
+--------------------------------------------------------------------------------
+COMMANDS                                                    *bookmacro-commands*
+
+--------------------------------------------------------------------------------
+ADD MACRO TO THE BOOK                                                *:MacroAdd*
+
+>vim
+    :MacroAdd
+<
+    Add a macro to BookMacro from a named register
+    TUI ask for:
+        - Register
+        - Description of the macro
+
+--------------------------------------------------------------------------------
+EXECUTE A MACRO FROM THE BOOK                                       *:MacroExec*
+
+>vim
+    :MacroExec
+<
+    Executes a macro from BookMacro
+    TUI ask for:
+        - Macro
+
+--------------------------------------------------------------------------------
+EDIT A MACRO FROM THE BOOK                                          *:MacroEdit*
+
+>vim
+    :MacroEdit
+<
+    Edit a macro from BookMacro
+    TUI ask for:
+        - Macro
+
+--------------------------------------------------------------------------------
+EDIT THE DESCRIPTION OF A MACRO                                 *:MacroDescEdit*
+
+>vim
+    :MacroDescEdit
+<
+    Edit the description of a macro from BookMacro
+    TUI ask for:
+        - Macro
+
+--------------------------------------------------------------------------------
+EDIT A MACRO FROM A REGISTER                                     *:MacroRegEdit*
+
+>vim
+    :MacroRegEdit
+<
+    Edit a macro from a named register
+    TUI ask for:
+        - Register
+
+--------------------------------------------------------------------------------
+REPLACE A MACRO FROM THE BOOK                                    *:MacroReplace*
+
+>vim
+    :MacroReplace
+<
+    Replace a macro from BookMacro with a named register
+    TUI ask for:
+        - Macro
+        - Register
+
+--------------------------------------------------------------------------------
+DELETE A MACRO FROM THE BOOK                                         *:MacroDel*
+
+>vim
+    :MacroDel
+<
+    Delete a macro from BookMacro
+    TUI ask for:
+        - Macro
+
+--------------------------------------------------------------------------------
+SELECT A MACRO FROM THE BOOK                                      *:MacroSelect*
+
+>vim
+    :MacroSelect
+<
+    Copy a macro from BookMacro to a named register
+    TUI ask for:
+        - Macro
+        - Register
+
+--------------------------------------------------------------------------------
+EXPORT THE BOOK                                                   *:MacroExport*
+
+>vim
+    :MacroExport
+<
+    Export BookMacro to a local JSON file
+    TUI ask for:
+        - JSON file
+
+--------------------------------------------------------------------------------
+EXPORT A MACRO FROM THE BOOK                                    *:MacroExportTo*
+
+>vim
+    :MacroExportTo
+<
+    Export a macro from BookMacro to a local JSON file (Append the file)
+    TUI ask for:
+        - Macro
+        - JSON file
+
+--------------------------------------------------------------------------------
+IMPORT THE BOOK                                                   *:MacroImport*
+
+>vim
+    :MacroImport
+<
+    Replace BookMacro with a local JSON file
+    TUI ask for:
+        - JSON file
+
+--------------------------------------------------------------------------------
+IMPORT THE BOOK FROM INTERNET                             *:MacroImportInternet*
+
+>vim
+    :MacroImportInternet
+<
+    Replace BookMacro with JSON data from an URL
+    TUI ask for:
+        - URL
+
+--------------------------------------------------------------------------------
+IMPORT A MACRO TO THE BOOK                                    *:MacroImportFrom*
+
+>vim
+    :MacroImportFrom
+<
+    Add a macro from a local JSON file to BookMacro
+    TUI ask for:
+        - JSON file
+        - Macro from the JSON file
+
+--------------------------------------------------------------------------------
+IMPORT A MACRO FROM INTERNET                          *:MacroImportFromInternet*
+
+>vim
+    :MacroImportFromInternet
+<
+    Add a macro with JSON data from an URL 
+    TUI ask for:
+        - URL
+        - Macro from JSON data
+
+--------------------------------------------------------------------------------
+ERASE THE BOOK                                                     *:MacroErase*
+
+>vim
+    :MacroErase
+<
+    Erase all macro from BookMacro
+    TUI ask for:
+        - Confirmation
+
+--------------------------------------------------------------------------------
+SUBSTITUTE ON REGISTER                                                 *:RegSub*
+
+>vim
+    :RegSub
+<
+    Use a regular expression substitution on a named register content
+    TUI ask for:
+        - Register
+        - Substitution pattern (ex: `/This/That/g`)
+
+--------------------------------------------------------------------------------
+SUBSTITUTE ON REGISTER EX COMMAND                                          *:Sr*
+
+>vim
+    :Sr {register} {subsitution-pattern}
+<
+    Use a regular expression substitution on a named register content
+    This is a commnd with parametter, the usage is more like `:s`
+
+    Example:
+>vim
+    :Sr a /This/That/g
+<
+    To replace 'This' by 'That' on named register A
 
 ================================================================================
-Section 3: License                                            *BookmacroLicense*
+LICENSE                                                      *bookmacro-license*
 
-MIT License
+>
+    MIT License
 
-Copyright (c) 2023 BigNose
+    Copyright (c) 2023 BigNose
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+<
 vim:tw=78:ts=8:noet:ft=help:norl:
