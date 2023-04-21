@@ -1,0 +1,85 @@
+*bookmacro.txt* Documentation for the BookMacro plugin
+
+______             _   ___  ___                      ~
+| ___ \           | |  |  \/  |                      ~
+| |_/ / ___   ___ | | _| .  . | __ _  ___ _ __ ___   ~
+| ___ \/ _ \ / _ \| |/ / |\/| |/ _` |/ __| '__/ _ \  ~
+| |_/ / (_) | (_) |   <| |  | | (_| | (__| | | (_) | ~
+\____/ \___/ \___/|_|\_\_|  |_/\__,_|\___|_|  \___/  ~
+
+
+https://github.com/bignos/bookmacro
+
+================================================================================
+CONTENTS                                                     *BookmacroContents*
+
+    1. Introduction.................................. |BookmacroIntroduction|
+    2. Usage......................................... |BookmacroUsage|
+    3. License....................................... |BookmacroLicense|
+
+================================================================================
+Section 1: Introduction                                  *BookmacroIntroduction*
+
+BookMacro is a macro management plugin.
+
+Think of BookMacro as a spell book, but instead of writing spells you write
+macros.
+Like any good spell book, it is useless if there is no spell registered.
+
+The main use of BookMacro will be to launch macros.
+
+Let's take a simple use case:
+you want to properly format a JSON file.
+You search and find that you can do this with
+
+`:%!python -m json.tool`
+
+You test the VIM command and find that it works as expected.
+
+The idea here is to keep the command for future use, or even to share it with
+others.
+This is where BookMacro comes in, you can record a macro in a named registry
+and save it with a description for later use.
+
+You will then be able to use the macro using BookMacro, which will save you
+unnecessary searches.
+
+The advantage of BookMacro will come with more complex macros, because it
+takes time to implement them, by saving it in BookMacro you will be able to
+reuse it easily but you will also have a description rather than the raw
+macro.
+Moreover you can use BookMacro to run the macro without affecting the
+registers.
+And finally you can share your macros with other users.
+
+================================================================================
+Section 2: Usage                                                *BookmacroUsage*
+
+WORK IN PROGRESS
+
+================================================================================
+Section 3: License                                            *BookmacroLicense*
+
+MIT License
+
+Copyright (c) 2023 BigNose
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+vim:tw=78:ts=8:noet:ft=help:norl:
